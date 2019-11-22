@@ -49,7 +49,7 @@
   },
   "husky": {
     "hooks": {
-      "precommit": "npm run eslint:check && npm run prettier:check"
+      "pre-commit": "npm run eslint:check && npm run prettier:check"
     }
   },
   "repository": {
