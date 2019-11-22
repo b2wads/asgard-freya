@@ -1,0 +1,5 @@
+defaults:
+  host: http://localhost:3000
+
+production:
+  host: env:ASGARD_API_HOST
