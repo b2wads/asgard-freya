@@ -1,8 +1,11 @@
+const qs = require('qs')
 const ScalingService = require('../services/scaling-service')
 
 const ScalingController = {
   async scale(req, res) {
-    const { app_name, instances } = req.query
+    const { message } = req.body
+
+    const { app_name, instances } = qs.parse(message)
 
     // TODO: usar schema validation
     const _instances = parseInt(instances, 10)
@@ -12,5 +15,6 @@ const ScalingController = {
     return res.end()
   }
 }
+
 
 module.exports = ScalingController
