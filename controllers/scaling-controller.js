@@ -16,5 +16,4 @@ const ScalingController = {
   }
 }
 
-
 module.exports = ScalingController
