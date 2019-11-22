@@ -1,10 +1,7 @@
 const axios = require('axios')
 const envLoader = require('env-o-loader')
 
-const { 
-  host,
-  authToken,
-} = envLoader('../config/asgard-api.yaml')
+const { host, authToken } = envLoader('../config/asgard-api.yaml')
 
 const AsgardApi = class {
   constructor(apiHost = host) {
@@ -17,10 +14,10 @@ const AsgardApi = class {
         method: 'put',
         url: `${this.apidHost}/v2/apps/${appName}`,
         data: { instances },
-        headers: { 
-          'Authorization': authToken,
+        headers: {
+          Authorization: authToken,
           'Content-Type': 'application/json'
-        },
+        }
       })
 
       return res.data
