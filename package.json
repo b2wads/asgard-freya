@@ -23,6 +23,7 @@
     "eslint-plugin-react": "7.14.3",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-you-dont-need-lodash-underscore": "6.6.0",
+    "husky": "^3.1.0",
     "mocha": "^6.2.1",
     "nock": "^11.7.0",
     "nyc": "^14.1.1",
@@ -45,6 +46,9 @@
     "test:integration": "npm t test/integration/*",
     "test:unit": "npm t test/unit/*",
     "worker:<worker-name>": "node workers/<worker-name.js>"
+  },
+  "husky": {
+    "precommit": "npm run eslint:check && npm run prettier:check"
   },
   "repository": {
     "type": "git",
