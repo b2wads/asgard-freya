@@ -48,7 +48,9 @@
     "worker:<worker-name>": "node workers/<worker-name.js>"
   },
   "husky": {
-    "precommit": "npm run eslint:check && npm run prettier:check"
+    "hooks": {
+      "precommit": "npm run eslint:check && npm run prettier:check"
+    }
   },
   "repository": {
     "type": "git",
