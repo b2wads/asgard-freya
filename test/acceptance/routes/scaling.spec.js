@@ -17,14 +17,11 @@ describe('Acceptance - [Scaling]', () => {
 
       res = await request(app)
         .post('/scaling')
-        .query({
-          app_name: 'awesome_app',
-          instances: 5
-        })
+        .send({ message: 'app_name=awesome_app&instances=5' })
     })
 
-    it('Should return status 200', () => {
-      expect(res.status).to.be.eql(200)
+    it('Should return status 204', () => {
+      expect(res.status).to.be.eql(204)
     })
   })
 })

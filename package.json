@@ -1,9 +1,10 @@
 {
-  "name": "nodejs-boilerplate",
+  "name": "asgard-freya",
   "version": "0.1.0",
-  "description": "Boilerplate para projetos NodeJS",
+  "description": "Webhook que se comunica com o Asgard para escalar apps",
   "main": "app.js",
   "dependencies": {
+    "@hapi/joi": "^16.1.8",
     "axios": "^0.19.0",
     "env-o-loader": "^1.0.7",
     "express": "4.17.0"
@@ -26,6 +27,7 @@
     "nock": "^11.7.0",
     "nyc": "^14.1.1",
     "prettier": "1.17.1",
+    "sinon": "^7.5.0",
     "supertest": "4.0.2"
   },
   "scripts": {
@@ -47,7 +49,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com:b2wads/nodejs-boilerplate"
+    "url": "github.com:b2wads/asgard-freya"
   },
   "keywords": [
     "nodejs",

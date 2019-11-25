@@ -2,14 +2,13 @@ const ScalingService = require('../services/scaling-service')
 
 const ScalingController = {
   async scale(req, res) {
-    const { app_name, instances } = req.query
+    const {
+      data: { app_name, instances }
+    } = req
 
-    // TODO: usar schema validation
-    const _instances = parseInt(instances, 10)
+    await ScalingService.scale(app_name, instances)
 
-    await ScalingService.scale(app_name, _instances)
-
-    return res.end()
+    return res.status(204).end()
   }
 }
 
