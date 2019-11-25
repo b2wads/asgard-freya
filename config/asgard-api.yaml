@@ -4,3 +4,4 @@ defaults:
 
 production:
   host: env:ASGARD_API_HOST
+  authToken: env:ASGARD_AUTHORIZATION_TOKEN

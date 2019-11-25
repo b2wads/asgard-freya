@@ -113,17 +113,18 @@ workflows:
           registry: $B2WADS_DOCKER_REGISTRY
           registry-username: B2WADS_DOCKER_REGISTRY_USERNAME
           registry-password: B2WADS_DOCKER_REGISTRY_PASSWORD
-          image-tag: staging-$(echo "$CIRCLE_BRANCH" | sed 's/\W/-/g')
+          image-tag: staging
           requires:
             - node10x
           filters:
             branches:
               ignore: master
+
       - notify-build-status: &notify-build-status-template
           context: docker-registry-auth
           name: notify-build-staging
           registry: $B2WADS_DOCKER_REGISTRY
-          image-tag: staging-$(echo "$CIRCLE_BRANCH" | sed 's/\W/-/g')
+          image-tag: staging
           github-api-token: $GITHUB_API_TOKEN
           requires:
             - build-staging

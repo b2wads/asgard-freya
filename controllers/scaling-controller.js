@@ -1,10 +1,11 @@
+const qs = require('qs')
 const ScalingService = require('../services/scaling-service')
 
 const ScalingController = {
   async scale(req, res) {
-    const {
-      data: { app_name, instances }
-    } = req
+    const { message } = req.body
+
+    const { app_name, instances } = qs.parse(message)
 
     await ScalingService.scale(app_name, instances)
 

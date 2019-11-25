@@ -69,10 +69,6 @@ describe('Unit - [SchemaValidation]', () => {
       context(
         'When the content of "message" pass the validation schema',
         () => {
-          const jsonSpy = sinon.spy()
-          const statusStub = sinon.stub().returns({
-            json: jsonSpy
-          }) /* callsFake(() => ({ json: jsonStub })) */
           const nextSpy = sinon.spy()
           let req
 

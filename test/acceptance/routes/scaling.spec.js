@@ -12,12 +12,12 @@ describe('Acceptance - [Scaling]', () => {
 
     before(async () => {
       nock(host)
-        .put('/v2/apps/awesome_app')
+        .put('/v2/apps/path/of/awesome_app')
         .reply(200)
 
       res = await request(app)
         .post('/scaling')
-        .send({ message: 'app_name=awesome_app&instances=5' })
+        .send({ message: 'app_name=path/of/awesome_app&instances=5' })
     })
 
     it('Should return status 204', () => {
