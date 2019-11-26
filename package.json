@@ -1,10 +1,17 @@
 {
-  "name": "nodejs-boilerplate",
+  "name": "asgard-freya",
   "version": "0.1.0",
-  "description": "Boilerplate para projetos NodeJS",
+  "description": "Webhook que se comunica com o Asgard para escalar apps",
   "main": "app.js",
   "dependencies": {
-    "express": "4.17.0"
+    "@hapi/joi": "^16.1.8",
+    "axios": "^0.19.0",
+    "env-o-loader": "^1.0.7",
+    "express": "4.17.0",
+    "express-pino-logger": "^4.0.0",
+    "pino": "^5.14.0",
+    "pino-pretty": "^3.4.0",
+    "qs": "^6.9.1"
   },
   "devDependencies": {
     "acorn": "^7.1.0",
@@ -20,9 +27,12 @@
     "eslint-plugin-react": "7.14.3",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-you-dont-need-lodash-underscore": "6.6.0",
+    "husky": "^3.1.0",
     "mocha": "^6.2.1",
+    "nock": "^11.7.0",
     "nyc": "^14.1.1",
     "prettier": "1.17.1",
+    "sinon": "^7.5.0",
     "supertest": "4.0.2"
   },
   "scripts": {
@@ -42,9 +52,15 @@
     "test:unit": "npm t test/unit/*",
     "worker:<worker-name>": "node workers/<worker-name.js>"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint:check && npm run prettier:check",
+      "pre-push": "npm t"
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "github.com:b2wads/nodejs-boilerplate"
+    "url": "github.com:b2wads/asgard-freya"
   },
   "keywords": [
     "nodejs",

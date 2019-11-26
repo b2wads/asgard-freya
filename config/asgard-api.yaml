@@ -1,0 +1,7 @@
+defaults:
+  host: http://localhost:3001
+  authToken: 'test'
+
+production:
+  host: env:ASGARD_API_HOST
+  authToken: env:ASGARD_AUTHORIZATION_TOKEN
