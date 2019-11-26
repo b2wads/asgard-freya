@@ -1,0 +1,7 @@
+defaults:
+  log:
+    level: error
+  
+production:  
+  log:
+    level: env:APPLICATION_LOG_LEVEL

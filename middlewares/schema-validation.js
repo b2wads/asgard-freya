@@ -1,5 +1,6 @@
 const qs = require('qs')
 const scaleSchema = require('../schemas/scale-schema')
+const ValidationError = require('../errors/validation-error')
 
 const schemaValidation = {
   handleScaling(req, res, next) {
@@ -9,9 +10,7 @@ const schemaValidation = {
 
     const { error, value } = scaleSchema.validate(data)
 
-    if (error) {
-      return res.status(400).json({ message: error.message })
-    }
+    if (error) throw new ValidationError(error.message)
 
     req.data = value
 

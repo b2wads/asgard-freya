@@ -1,32 +1,31 @@
 const sinon = require('sinon')
 const { handleScaling } = require('../../../middlewares/schema-validation')
+const ValidationError = require('../../../errors/validation-error')
 
 describe('Unit - [SchemaValidation]', () => {
   describe('#habndleScaling()', () => {
     context('When the param "message" is not provided', () => {
-      const jsonSpy = sinon.spy()
-      const statusStub = sinon
-        .stub()
-        .returns({ json: jsonSpy }) /* callsFake(() => ({ json: jsonStub })) */
       const nextSpy = sinon.spy()
+      let result
 
       before(() => {
         const req = { body: {} }
-        const res = { status: statusStub }
         const next = nextSpy
 
-        handleScaling(req, res, next)
+        try {
+          handleScaling(req, null, next)
+        } catch (err) {
+          result = err
+        }
       })
 
-      it('Should return status 400', () => {
-        expect(statusStub.calledOnce).to.be.true
-        expect(statusStub.calledWith(400)).to.be.true
+      it('Should throw a ValidationError', () => {
+        expect(result instanceof ValidationError).to.be.true
       })
 
-      // it('Should return the error message in response body', () => {
-      //   expect(jsonSpy.calledOnce).to.be.true
-      //   expect(jsonSpy.calledWith({ message: 'teste' })).to.be.true
-      // })
+      it('Should return error message', () => {
+        expect(result.message).to.be.equal('"app_name" is required')
+      })
 
       it('Should not have been called next()', () => {
         expect(nextSpy.called).to.be.false
@@ -37,29 +36,27 @@ describe('Unit - [SchemaValidation]', () => {
       context(
         'When the content of "message" doesnt pass the validation schema',
         () => {
-          const jsonSpy = sinon.spy()
-          const statusStub = sinon.stub().returns({
-            json: jsonSpy
-          }) /* callsFake(() => ({ json: jsonStub })) */
           const nextSpy = sinon.spy()
+          let result
 
           before(() => {
             const req = { body: { message: 'anotherValue' } }
-            const res = { status: statusStub }
             const next = nextSpy
 
-            handleScaling(req, res, next)
+            try {
+              handleScaling(req, null, next)
+            } catch (err) {
+              result = err
+            }
           })
 
-          it('Should return status 400', () => {
-            expect(statusStub.calledOnce).to.be.true
-            expect(statusStub.calledWith(400)).to.be.true
+          it('Should throw a ValidationError', () => {
+            expect(result instanceof ValidationError).to.be.true
           })
 
-          // it('Should return the error message in response body', () => {
-          //   expect(jsonSpy.calledOnce).to.be.true
-          //   expect(jsonSpy.calledWith({ message: 'teste' })).to.be.true
-          // })
+          it('Should return error message', () => {
+            expect(result.message).to.be.equal('"app_name" is required')
+          })
 
           it('Should not have been called next()', () => {
             expect(nextSpy.called).to.be.false

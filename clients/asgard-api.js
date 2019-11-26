@@ -1,7 +1,7 @@
 const axios = require('axios')
-const envLoader = require('env-o-loader')
-
-const { host, authToken } = envLoader('../config/asgard-api.yaml')
+const logger = require('../initializers/logger')
+const AsgardError = require('../errors/asgard-error')
+const { host, authToken } = require('../config').asgardApi
 
 const AsgardApi = class {
   constructor(apiHost = host) {
@@ -10,7 +10,7 @@ const AsgardApi = class {
 
   async scale(appName, instances) {
     try {
-      const res = await axios({
+      const options = {
         method: 'put',
         url: `${this.apidHost}/v2/apps/${appName}`,
         data: { instances },
@@ -18,13 +18,20 @@ const AsgardApi = class {
           Authorization: authToken,
           'Content-Type': 'application/json'
         }
-      })
+      }
+
+      logger.debug(`Trying to call Asgard API with options: `, options)
+
+      const res = await axios(options)
+
+      logger.debug(`Called Asgard API with success. Response`, res.data)
 
       return res.data
     } catch (err) {
-      // FIXME: Trocar para log
-      // console.log(err.message, err.stack)
-      throw new Error(`trying to scale ${appName} to ${instances} instances`)
+      logger.error(err.message)
+      throw new AsgardError(
+        `trying to scale ${appName} to ${instances} instances`
+      )
     }
   }
 }
